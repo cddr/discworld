@@ -1,0 +1,8 @@
+
+discworld -- The world of CDISC (in Lisp)
+--------------------------------------------
+
+The clinical trial community have gathered together to
+produce an extensive set of standards for data transfer,
+dataset structures, and eCRF content guides.  This
+project implements some of those specifications.
