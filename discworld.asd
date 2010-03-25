@@ -22,8 +22,8 @@ See the Lisp Lesser GNU Public License for more details.
 
 (defsystem :discworld
   :description "The world of CDISC (in Lisp)"
-  :author "$Format:%an %ae$"
-  :version "$Format:%H$"
+  :author "$Format:%an <%ae>$"
+  :version "[VERSION]"
   :license "LLGPL"
   :name "discworld"
   :depends-on (:s-xml)
