@@ -21,7 +21,7 @@ CDISC in a programming language standardized by ANSI :-)
 
 # Documentation
 
-Not yet I'm afraid
+Not yet I'm afraid, although there is decent doc string coverage
 
 
 # See also
@@ -29,5 +29,5 @@ Not yet I'm afraid
 * [common-lisp-stat](http://github.com/blindglobe/common-lisp-stat)
 * [CDISC](http://www.cdisc.org/standards)
 * [OpenCDISC](http://www.opencdisc.org/)
-* [OpenClinical](http://www.openclinica.org/)
+* [OpenClinica](http://www.openclinica.org/)
 
