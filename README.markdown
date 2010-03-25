@@ -26,6 +26,8 @@ Not yet I'm afraid
 
 # See also
 
+* [common-lisp-stat](http://github.com/blindglobe/common-lisp-stat)
 * [CDISC](http://www.cdisc.org/standards)
 * [OpenCDISC](http://www.opencdisc.org/)
 * [OpenClinical](http://www.openclinica.org/)
+
