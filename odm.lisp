@@ -85,6 +85,8 @@ one of the 'General Elements' defined by CDISC ODM"
 		 (kids root)))))
 
 (defun odm-find-one (root &key test)
+  "Traverses the ODM model looking for the first node (in document
+order) that passes `test'"
   (if (funcall test root)
       root
       (some (lambda (kid)
@@ -92,20 +94,27 @@ one of the 'General Elements' defined by CDISC ODM"
 	    (kids root))))
 
 (defun of-elem-type (name)
+  "Given the name of an ODM type, returns a function that takes one
+argument (an odm-object) and returns true if that argument is an
+odm-object of the named type"
   (lambda (odm-obj)
     (when (eq name (odm-type odm-obj))
       odm-obj)))
 
 (defun kids-like (name &key in)
+  "Returns kids of `in', of odm-type `name'"
   (mapcar (odm-object-factory in)
     (mapcar 'xml
 	  (remove-if-not (of-elem-type name)
 			 (kids in)))))
 
 (defun kid-like (name &key in)
+  "Returns the first kid of `in', of odm-type `name'"
   (first (kids-like name :in in)))
 
 (defun oid-attr (odm-type)
+  "Returns the property which should be used to obtain the OID
+of an odm-object of `odm-type'"
   (case (intern (symbol-name odm-type) :odm)
     (odm :|FileOID|)
     (studyeventref :|StudyEventOID|)
@@ -116,19 +125,28 @@ one of the 'General Elements' defined by CDISC ODM"
     (otherwise :|OID|)))
 
 (defun p= (property-name value)
+  "Given a property-name, and a corresponding value, returns a
+function which takes one argument (an odm-object) and returns true
+if that argument has a property named `property-name' with value
+`value'"
   (lambda (obj)
     (string= (property obj property-name)
 	     value)))
 
 (defun oid= (name)
+  "Given an OID `name', returns a function which takes one argument
+\(an odm-object) and returns true if (oid obj) is `string=' to `name'"
   (lambda (obj)
     (string= (oid obj) name)))
 
 (defun name= (name)
+  "Given an name `name', returns a function which takes one argument
+\(an odm-object) and returns true if (name obj) is `string=' to `name'"
   (lambda (obj)
     (string= (name obj) name)))
 
 (defun flatten (node)
+  "Flattens nested lists into a single list"
   (labels ((rec (node accumulation)
 	     (cond ((null node) accumulation)
 		   ((atom node) (cons node
@@ -150,7 +168,14 @@ one of the 'General Elements' defined by CDISC ODM"
 ;;     #'self))
 
 (defun fint (fn &rest fns)
-  "functional intersection (from 'On Lisp')"
+  "functional intersection (from 'On Lisp')
+
+\(fint 'signed 'sealed 'delivered)
+=> (lambda (x)
+     (and (signed x)
+          (sealed x)
+          (delivered x)))
+"
   (if (null fns)
       fn
     (let ((chain (apply #'fint fns)))
@@ -159,7 +184,9 @@ one of the 'General Elements' defined by CDISC ODM"
 
 (defun odm-flip (sym)
   "Flips a symbol from either def to ref, or ref to def depending
-on what was passed in"
+on what was passed in
+
+XXX Needs a better name.  I'm open to suggestions"
   (let* ((mapping '((studyeventref studyeventdef)
 		    (formref formdef)
 		    (itemgroupref itemgroupdef)
@@ -172,11 +199,17 @@ on what was passed in"
 
 
 (defmethod find-def ((ref odm-object))
-  (let ((ref-type (odm-type ref)))
-    (odm-find-one (metadata ref)
-      :test (fint (oid= (oid ref))
-		  (of-elem-type (odm-flip ref-type))))))
+  "Finds the \"def\" referenced by `ref'
 
+XXX This only really works in the simplest of cases.  For example,
+it ignores the possibility of <odm:Include/> files and where some
+ref might reference a def in another MetaDataVersion.  It is
+reasonably efficent though, using as it does the index through
+odm-lookup"
+  (odm-lookup
+   :type (odm-flip (odm-type ref))
+   :metadata (metadata ref)
+   :ref ref))
 
 
 (defun odm-index (mdv def)
