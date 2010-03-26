@@ -24,7 +24,7 @@ See the Lisp Lesser GNU Public License for more details.
   :description "The world of CDISC (in Lisp)"
   :author "Andy Chambers <achambers.home@gmail.com>"
   :license "LLGPL"
-  :version "@@VERSION@@"
+  :version "1.4"
   :name "discworld"
   :depends-on (:s-xml)
   :serial t

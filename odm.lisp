@@ -84,6 +84,14 @@ one of the 'General Elements' defined by CDISC ODM"
 		   (odm-gather root :test test))
 		 (kids root)))))
 
+(defun value-of (odm-object)
+  "Concatenates all the textual elements beneath `odm-object' (like
+<xsl:value-of../>"
+  (with-output-to-string (s)
+    (mapc (lambda (item)
+	    (format s "~a" (xml item)))
+	  (odm-gather odm-object :test (of-elem-type 'odm-text)))))
+
 (defun odm-find-one (root &key test)
   "Traverses the ODM model looking for the first node (in document
 order) that passes `test'"

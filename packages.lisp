@@ -10,6 +10,9 @@
 	   #:odm-root
 	   #:odm-type
 
+	   #:kids-like #:name= #:odm-find-one #:odm-gather
+	   #:of-elem-type #:value-of
+
 	   #:kids #:find-def
 	   #:items #:groups #:forms #:events #:metadata
 
