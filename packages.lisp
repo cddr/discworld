@@ -1,6 +1,6 @@
 
 (defpackage :odm
-  (:use :cl :s-xml)
+  (:use :cl)
   (:export #:oid 
 	   #:name #:property #:properties
 
@@ -20,4 +20,21 @@
 	   #:parse-odm-stream))
 
 (defpackage :define
-  (:use :cl :odm))
+  (:use :cl :odm)
+  (:export #:find-define #:find-domain
+	   #:domains #:variables
+	     #:name
+	     #:variables
+	     #:description
+	     #:data-structure
+	     #:keys
+	     #:location
+	     #:purpose
+
+	     #:label
+	     #:data-type
+	     #:terminology
+	     #:origin
+	     #:role
+	     #:comment))
+	   
