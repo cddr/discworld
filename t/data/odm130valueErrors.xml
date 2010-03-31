@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3"
-     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-     xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3-0.xsd"
-
-     ODMVersion="1.3"
-     FileOID="000-00-0000"
-     FileType="Transactional"
-     Description="Sample ItemData Extension"
-
-     AsOfDateTime="2005-03-31T00:00:00"
-     CreationDateTime="2005-04-04T07:57:00" >
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3-0.xsd" ODMVersion="1.3" FileOID="000-00-0000" FileType="Transactional" Description="Sample ItemData Extension" AsOfDateTime="2005-03-31T00:00:00" CreationDateTime="2005-04-04T07:57:00">
 
    <Study OID="StudyOID">
 
@@ -24,34 +12,30 @@
          <ProtocolName>CDISC-Protocol-00-000</ProtocolName>
       </GlobalVariables>
 
-      <BasicDefinitions />
+      <BasicDefinitions/>
 
       <!--
             Internal ODM markup required metadata
         -->
       <MetaDataVersion OID="v1.3.0" Name="Version 1.3.0">
          <Protocol>
-            <StudyEventRef StudyEventOID="StudyEventOID" OrderNumber="1" Mandatory="Yes" />
+            <StudyEventRef StudyEventOID="StudyEventOID" OrderNumber="1" Mandatory="Yes"/>
          </Protocol>
 
          <StudyEventDef OID="StudyEventOID" Name="Study Event Definition" Repeating="Yes" Type="Common">
-            <FormRef FormOID="FormOID" OrderNumber="1" Mandatory="No" />
+            <FormRef FormOID="FormOID" OrderNumber="1" Mandatory="No"/>
          </StudyEventDef>
 
          <FormDef OID="FormOID" Name="Form Definition" Repeating="Yes">
-            <ItemGroupRef ItemGroupOID="ValueError" Mandatory="No" />
+            <ItemGroupRef ItemGroupOID="ValueError" Mandatory="No"/>
          </FormDef>
 
 
          <!--
                Columns defined in the table
            -->
-         <ItemGroupDef OID="ValueError" Repeating="Yes"
-                       SASDatasetName="Error"
-                       Name="ItemData Extension"
-                       Domain="RawValue"
-                       Comment="Sample ItemData Extension">
-            <ItemRef ItemOID="ID.VALUE"    OrderNumber="1" Mandatory="No" />
+         <ItemGroupDef OID="ValueError" Repeating="Yes" SASDatasetName="Error" Name="ItemData Extension" Domain="RawValue" Comment="Sample ItemData Extension">
+            <ItemRef ItemOID="ID.VALUE" OrderNumber="1" Mandatory="No"/>
          </ItemGroupDef>
 
 
@@ -59,7 +43,7 @@
                Column attributes as defined in the table
                Demonstration of the Description attribute in v1.3.0 (no error reported)
          -->
-         <ItemDef OID="ID.VALUE" SASFieldName="VALUE" Name="VALUE"   DataType="string" />
+         <ItemDef OID="ID.VALUE" SASFieldName="VALUE" Name="VALUE" DataType="string"/>
 
 
       </MetaDataVersion>
@@ -89,21 +73,21 @@
                   <!-- ItemData ItemOID="ID.VALUE"  Value="&lt; less than" / -->
                   <!-- ItemDataString ItemOID="ID.VALUE">< less than</ItemDataString -->
                   <ItemDataString ItemOID="ID.VALUE">&lt; less than</ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[< less than]]></ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">&lt; less than</ItemDataString>
                </ItemGroupData>
                       
                <ItemGroupData ItemGroupOID="ValueError" ItemGroupRepeatKey="GREATER" TransactionType="Insert">
                   <!-- ItemData ItemOID="ID.VALUE"  Value="> greater than" / -->
                   <!-- ItemData ItemOID="ID.VALUE"  Value="&gt; greater than" / -->
                   <ItemDataString ItemOID="ID.VALUE">&gt; greater than</ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[> greater than]]></ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">&gt; greater than</ItemDataString>
                </ItemGroupData>
 
                 <ItemGroupData ItemGroupOID="ValueError" ItemGroupRepeatKey="APOS" TransactionType="Insert">
                   <!-- ItemData ItemOID="ID.VALUE"  Value="' single quote" / -->
                   <!-- ItemData ItemOID="ID.VALUE"  Value="&apos; single quote" / -->
-                  <ItemDataString ItemOID="ID.VALUE">&apos; single quote</ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[> greater than]]></ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">' single quote</ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">&gt; greater than</ItemDataString>
                </ItemGroupData>
 
                <ItemGroupData ItemGroupOID="ValueError" ItemGroupRepeatKey="QUOT" TransactionType="Insert">
@@ -116,8 +100,8 @@
                   <!-- ItemData ItemOID="ID.VALUE"  Value='" double quote' / -->
                   <!-- ItemData ItemOID="ID.VALUE"  Value='&quot; double quote' / -->
                   <!-- ItemData ItemOID="ID.VALUE"  Value="&quot; double quote" / -->
-                  <ItemDataString ItemOID="ID.VALUE">&quot; double quote</ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[" double quote]]></ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">" double quote</ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">" double quote</ItemDataString>
                </ItemGroupData>
 
                <ItemGroupData ItemGroupOID="ValueError" ItemGroupRepeatKey="AMP" TransactionType="Insert">
@@ -129,7 +113,7 @@
                   <!-- ItemData ItemOID="ID.VALUE"  Value="&amp; ampersand" / -->
                   <!-- ItemDataString ItemOID="ID.VALUE">& ampersand</ItemDataString -->
                   <ItemDataString ItemOID="ID.VALUE">&amp; ampersand</ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[& ampersand]]></ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">&amp; ampersand</ItemDataString>
                </ItemGroupData>
 
                <ItemGroupData ItemGroupOID="ValueError" ItemGroupRepeatKey="DASH" TransactionType="Insert">
@@ -139,31 +123,31 @@
                   <ItemDataString ItemOID="ID.VALUE">= equal</ItemDataString>
                   <ItemDataString ItemOID="ID.VALUE">- dash</ItemDataString>
                   <ItemDataString ItemOID="ID.VALUE">-- dash dash</ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[= equal]]></ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[- dash]]></ItemDataString>
-                  <ItemDataString ItemOID="ID.VALUE"><![CDATA[-- dash dash]]></ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">= equal</ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">- dash</ItemDataString>
+                  <ItemDataString ItemOID="ID.VALUE">-- dash dash</ItemDataString>
                </ItemGroupData>
                 
 
                 
                <ItemGroupData ItemGroupOID="ValueError" ItemGroupRepeatKey="CDATA" TransactionType="Insert">
                   <ItemDataString ItemOID="ID.VALUE">
-                     <![CDATA[
-                     this & that sort of content can simply be typed "as-is" when the CDATA marker methodology is applied.
+                     
+                     this &amp; that sort of content can simply be typed "as-is" when the CDATA marker methodology is applied.
                      the big-5
-                          less than     (<)
-                          greater than  (>)
+                          less than     (&lt;)
+                          greater than  (&gt;)
                           single quote  (') 
                           double quote  (")
-                          ampersand     (&)
+                          ampersand     (&amp;)
                      and even the CDATA marker brackets
                           left bracket  ([)
                           right bracket (])
                      are all permitted to appear without any additional escapement.
                      this is especially important in situations where non "XML-savy" personnel are being charged with the supply of content.
-                     generating applications can automatically emit the beginning & ending CDATA escapement sequences and be assured that no 
+                     generating applications can automatically emit the beginning &amp; ending CDATA escapement sequences and be assured that no 
                      additional maniplation of the content's necessary. and, yes, i purposely left out putting another CDATA marker in here ;-)
-                     ]]>
+                     
                   </ItemDataString>
                </ItemGroupData>
                
@@ -174,8 +158,8 @@
                         ERROR 
                         Description: F The value of attribute "Value" associated with an element type "ItemData" must not contain the '<' character. 
                     -->
-                  <ItemData ItemOID="ID.VALUE"  Value="<![CDATA[this & that]]>" />
-                  <ItemData ItemOID="ID.VALUE"  Value="&lt;![CDATA[this &amp; that]]&gt;" /> <!-- this is not really the intention, is it -->
+
+                  <ItemData ItemOID="ID.VALUE" Value="&lt;![CDATA[this &amp; that]]&gt;"/> <!-- this is not really the intention, is it -->
                   <!-- ItemDataString ItemOID="ID.VALUE">this &amp; that</ItemDataString -->
                   <!-- ItemDataString ItemOID="ID.VALUE"><![CDATA[this & that]]></ItemDataString -->
                </ItemGroupData>

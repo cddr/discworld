@@ -1,6 +1,12 @@
 
 (in-package :test.discworld)
 
+
+(parse-odm (find-test-file "odm130.utf-8.xml"))
+	    
+
+
+
 (deftest test/odm121 ()
   (let ((root (parse-odm (find-test-file "odm121.xml"))))
     (check (string= "1.2"

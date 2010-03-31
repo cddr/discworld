@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
       Clinical Data Interchange Standards Consortium (CDISC)
       Operational Data Model (ODM) for clinical data interchange
@@ -6,20 +6,7 @@
       You can learn more about CDISC standards efforts at 
       http://www.cdisc.org/standards/index.html
   -->
-
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3"
-     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-     xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3-0.xsd"
-
-     ODMVersion="1.3"
-     FileOID="000-00-0000"
-     FileType="Transactional"
-     Description="Sample ItemData Extension"
-
-     AsOfDateTime="2005-03-31T00:00:00"
-     CreationDateTime="2005-04-04T07:57:00" >
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3-0.xsd" ODMVersion="1.3" FileOID="000-00-0000" FileType="Transactional" Description="Sample ItemData Extension" AsOfDateTime="2005-03-31T00:00:00" CreationDateTime="2005-04-04T07:57:00">
 
    <Study OID="StudyOID">
 
@@ -32,56 +19,52 @@
          <ProtocolName>CDISC-Protocol-00-000</ProtocolName>
       </GlobalVariables>
 
-      <BasicDefinitions />
+      <BasicDefinitions/>
 
       <!--
             Internal ODM markup required metadata
         -->
       <MetaDataVersion OID="v1.3.0" Name="Version 1.3.0">
          <Protocol>
-            <StudyEventRef StudyEventOID="StudyEventOID" OrderNumber="1" Mandatory="Yes" />
+            <StudyEventRef StudyEventOID="StudyEventOID" OrderNumber="1" Mandatory="Yes"/>
          </Protocol>
 
          <StudyEventDef OID="StudyEventOID" Name="Study Event Definition" Repeating="Yes" Type="Common">
-            <FormRef FormOID="FormOID" OrderNumber="1" Mandatory="No" />
+            <FormRef FormOID="FormOID" OrderNumber="1" Mandatory="No"/>
          </StudyEventDef>
 
          <FormDef OID="FormOID" Name="Form Definition" Repeating="Yes">
-            <ItemGroupRef ItemGroupOID="DATATYPE" Mandatory="No" />
+            <ItemGroupRef ItemGroupOID="DATATYPE" Mandatory="No"/>
          </FormDef>
 
 
          <!--
                Columns defined in the table
            -->
-         <ItemGroupDef OID="DATATYPE" Repeating="Yes"
-                       SASDatasetName="DATATYPE"
-                       Name="ItemData Extension"
-                       Domain="RawValue"
-                       Comment="Sample ItemData Extension">
-            <ItemRef ItemOID="ID.D"    OrderNumber="1" Mandatory="No" />
-            <ItemRef ItemOID="ID.T"    OrderNumber="2" Mandatory="No" />
-            <ItemRef ItemOID="ID.DT"   OrderNumber="3" Mandatory="No" />
-            <ItemRef ItemOID="ID.PD"   OrderNumber="4" Mandatory="No" />
-            <ItemRef ItemOID="ID.PT"   OrderNumber="5" Mandatory="No" />
-            <ItemRef ItemOID="ID.PDT"  OrderNumber="6" Mandatory="No" />
-            <ItemRef ItemOID="ID.DDT"  OrderNumber="7" Mandatory="No" />
-            <ItemRef ItemOID="ID.IDT"  OrderNumber="8" Mandatory="No" />
-            <ItemRef ItemOID="ID.NDT"  OrderNumber="9" Mandatory="No" />
+         <ItemGroupDef OID="DATATYPE" Repeating="Yes" SASDatasetName="DATATYPE" Name="ItemData Extension" Domain="RawValue" Comment="Sample ItemData Extension">
+            <ItemRef ItemOID="ID.D" OrderNumber="1" Mandatory="No"/>
+            <ItemRef ItemOID="ID.T" OrderNumber="2" Mandatory="No"/>
+            <ItemRef ItemOID="ID.DT" OrderNumber="3" Mandatory="No"/>
+            <ItemRef ItemOID="ID.PD" OrderNumber="4" Mandatory="No"/>
+            <ItemRef ItemOID="ID.PT" OrderNumber="5" Mandatory="No"/>
+            <ItemRef ItemOID="ID.PDT" OrderNumber="6" Mandatory="No"/>
+            <ItemRef ItemOID="ID.DDT" OrderNumber="7" Mandatory="No"/>
+            <ItemRef ItemOID="ID.IDT" OrderNumber="8" Mandatory="No"/>
+            <ItemRef ItemOID="ID.NDT" OrderNumber="9" Mandatory="No"/>
              
-            <ItemRef ItemOID="ID.FLOAT"         OrderNumber="10" Mandatory="No" />
-            <ItemRef ItemOID="ID.HEXFLOAT"      OrderNumber="11" Mandatory="No" />
-            <ItemRef ItemOID="ID.BASE64FLOAT"   OrderNumber="12" Mandatory="No" />
+            <ItemRef ItemOID="ID.FLOAT" OrderNumber="10" Mandatory="No"/>
+            <ItemRef ItemOID="ID.HEXFLOAT" OrderNumber="11" Mandatory="No"/>
+            <ItemRef ItemOID="ID.BASE64FLOAT" OrderNumber="12" Mandatory="No"/>
 
-            <ItemRef ItemOID="ID.STRING"        OrderNumber="13" Mandatory="No" />
-            <ItemRef ItemOID="ID.HEXBINARY"     OrderNumber="14" Mandatory="No" />
-            <ItemRef ItemOID="ID.BASE64BINARY"  OrderNumber="15" Mandatory="No" />
+            <ItemRef ItemOID="ID.STRING" OrderNumber="13" Mandatory="No"/>
+            <ItemRef ItemOID="ID.HEXBINARY" OrderNumber="14" Mandatory="No"/>
+            <ItemRef ItemOID="ID.BASE64BINARY" OrderNumber="15" Mandatory="No"/>
              
-            <ItemRef ItemOID="ID.FLOAT"         OrderNumber="16" Mandatory="No" />
-            <ItemRef ItemOID="ID.DOUBLE"        OrderNumber="17" Mandatory="No" />
+            <ItemRef ItemOID="ID.FLOAT" OrderNumber="16" Mandatory="No"/>
+            <ItemRef ItemOID="ID.DOUBLE" OrderNumber="17" Mandatory="No"/>
              
-            <ItemRef ItemOID="ID.URI"           OrderNumber="18" Mandatory="No" />
-            <ItemRef ItemOID="ID.BOOLEAN"       OrderNumber="19" Mandatory="No" />
+            <ItemRef ItemOID="ID.URI" OrderNumber="18" Mandatory="No"/>
+            <ItemRef ItemOID="ID.BOOLEAN" OrderNumber="19" Mandatory="No"/>
              
          </ItemGroupDef>
 
@@ -90,38 +73,38 @@
                Column attributes as defined in the table
                Demonstration of the Description attribute in v1.3.0 (no error reported)
            -->
-         <ItemDef OID="ID.D"     SASFieldName="D"    Name="D"   DataType="date" />
-         <ItemDef OID="ID.T"     SASFieldName="T"    Name="T"   DataType="time" />
-         <ItemDef OID="ID.DT"    SASFieldName="DT"   Name="DT"  DataType="datetime" />
-         <ItemDef OID="ID.PD"    SASFieldName="PD"   Name="PD"  DataType="partialDate" />
-         <ItemDef OID="ID.PT"    SASFieldName="PT"   Name="PT"  DataType="partialTime" />
-         <ItemDef OID="ID.PDT"   SASFieldName="PDT"  Name="PDT" DataType="partialDatetime" />
-         <ItemDef OID="ID.DDT"   SASFieldName="DDT"  Name="DDT" DataType="durationDatetime" />
-         <ItemDef OID="ID.IDT"   SASFieldName="IDT"  Name="IDT" DataType="intervalDatetime" />
-         <ItemDef OID="ID.NDT"   SASFieldName="NDT"  Name="NDT" DataType="incompleteDatetime" />
+         <ItemDef OID="ID.D" SASFieldName="D" Name="D" DataType="date"/>
+         <ItemDef OID="ID.T" SASFieldName="T" Name="T" DataType="time"/>
+         <ItemDef OID="ID.DT" SASFieldName="DT" Name="DT" DataType="datetime"/>
+         <ItemDef OID="ID.PD" SASFieldName="PD" Name="PD" DataType="partialDate"/>
+         <ItemDef OID="ID.PT" SASFieldName="PT" Name="PT" DataType="partialTime"/>
+         <ItemDef OID="ID.PDT" SASFieldName="PDT" Name="PDT" DataType="partialDatetime"/>
+         <ItemDef OID="ID.DDT" SASFieldName="DDT" Name="DDT" DataType="durationDatetime"/>
+         <ItemDef OID="ID.IDT" SASFieldName="IDT" Name="IDT" DataType="intervalDatetime"/>
+         <ItemDef OID="ID.NDT" SASFieldName="NDT" Name="NDT" DataType="incompleteDatetime"/>
 
-         <ItemDef OID="ID.FLOAT"         SASFieldName="RFLT"  Name="RFLT" DataType="float" />
-         <ItemDef OID="ID.HEXFLOAT"      SASFieldName="XFLT"  Name="XFLT" DataType="hexFloat" />
-         <ItemDef OID="ID.BASE64FLOAT"   SASFieldName="MFLT"  Name="MFLT" DataType="base64Float" />
+         <ItemDef OID="ID.FLOAT" SASFieldName="RFLT" Name="RFLT" DataType="float"/>
+         <ItemDef OID="ID.HEXFLOAT" SASFieldName="XFLT" Name="XFLT" DataType="hexFloat"/>
+         <ItemDef OID="ID.BASE64FLOAT" SASFieldName="MFLT" Name="MFLT" DataType="base64Float"/>
 
-         <ItemDef OID="ID.STRING"        SASFieldName="STR"   Name="STR"  DataType="string" Length="20" />
-         <ItemDef OID="ID.HEXBINARY"     SASFieldName="XBIN"  Name="XBIN" DataType="hexBinary" />
-         <ItemDef OID="ID.BASE64BINARY"  SASFieldName="MBIN"  Name="MBIM" DataType="base64Binary" />
+         <ItemDef OID="ID.STRING" SASFieldName="STR" Name="STR" DataType="string" Length="20"/>
+         <ItemDef OID="ID.HEXBINARY" SASFieldName="XBIN" Name="XBIN" DataType="hexBinary"/>
+         <ItemDef OID="ID.BASE64BINARY" SASFieldName="MBIN" Name="MBIM" DataType="base64Binary"/>
 
-         <ItemDef OID="ID.FLOAT"         SASFieldName="FLOAT"  Name="FLOAT"  DataType="float" />
-         <ItemDef OID="ID.DOUBLE"        SASFieldName="DOUBLE" Name="DOUBLE" DataType="double" />
+         <ItemDef OID="ID.FLOAT" SASFieldName="FLOAT" Name="FLOAT" DataType="float"/>
+         <ItemDef OID="ID.DOUBLE" SASFieldName="DOUBLE" Name="DOUBLE" DataType="double"/>
 
-         <ItemDef OID="ID.URI"           SASFieldName="URI"     Name="URI"     DataType="URI" />
-         <ItemDef OID="ID.BOOLEAN"       SASFieldName="BOOLEAN" Name="BOOLEAN" DataType="boolean" />
+         <ItemDef OID="ID.URI" SASFieldName="URI" Name="URI" DataType="URI"/>
+         <ItemDef OID="ID.BOOLEAN" SASFieldName="BOOLEAN" Name="BOOLEAN" DataType="boolean"/>
 
       <!--
            Demonstration of the Decode element being optional in CodeList for v1.3.0
            to support simple enumerations of acceptable values not requiring translation
            (no error reported)
         -->
-         <CodeList OID="CL.$SEX" SASFormatName="$SEX"  Name="$SEX" DataType="string">
-            <EnumeratedItem CodedValue="F" />
-            <EnumeratedItem CodedValue="M" />
+         <CodeList OID="CL.$SEX" SASFormatName="$SEX" Name="$SEX" DataType="string">
+            <EnumeratedItem CodedValue="F"/>
+            <EnumeratedItem CodedValue="M"/>
          </CodeList>
       </MetaDataVersion>
    </Study>
@@ -172,12 +155,12 @@
          <StudyEventData StudyEventOID="StudyEventOID" StudyEventRepeatKey="1">
             <FormData FormOID="FormOID" FormRepeatKey="1">
                <ItemGroupData ItemGroupOID="DATATYPE" ItemGroupRepeatKey="ALL ATTRIBUTE" TransactionType="Insert">
-                  <ItemData ItemOID="ID.PD"  Value="1959-12" />
-                  <ItemData ItemOID="ID.PT"  Value="12" />
-                  <ItemData ItemOID="ID.PDT" Value="1959-12-11T12" />
-                  <ItemData ItemOID="ID.DDT" Value="P03Y11M07DT16H" />
-                  <ItemData ItemOID="ID.IDT" Value="19591211/20031107T1624" />
-                  <ItemData ItemOID="ID.NDT" Value="1959---11T12:34:56-05:00" />
+                  <ItemData ItemOID="ID.PD" Value="1959-12"/>
+                  <ItemData ItemOID="ID.PT" Value="12"/>
+                  <ItemData ItemOID="ID.PDT" Value="1959-12-11T12"/>
+                  <ItemData ItemOID="ID.DDT" Value="P03Y11M07DT16H"/>
+                  <ItemData ItemOID="ID.IDT" Value="19591211/20031107T1624"/>
+                  <ItemData ItemOID="ID.NDT" Value="1959---11T12:34:56-05:00"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -195,7 +178,7 @@
                <ItemGroupData ItemGroupOID="DATATYPE" ItemGroupRepeatKey="ALL ELEMENT" TransactionType="Insert">
                   <ItemDataPartialDate ItemOID="ID.PD">1959-12</ItemDataPartialDate>
                   <ItemDataPartialTime ItemOID="ID.PT">12</ItemDataPartialTime>
-                  <ItemDataPartialDatetime  ItemOID="ID.PDT">1959-12-11T12</ItemDataPartialDatetime>
+                  <ItemDataPartialDatetime ItemOID="ID.PDT">1959-12-11T12</ItemDataPartialDatetime>
                   <ItemDataDurationDatetime ItemOID="ID.DDT">P03Y11M07DT16H</ItemDataDurationDatetime>
                   <ItemDataIntervalDatetime ItemOID="ID.IDT">19591211/20031107T1624</ItemDataIntervalDatetime>        
                   <ItemDataIncompleteDatetime ItemOID="ID.NDT">1959---11T12:34:56-05:00</ItemDataIncompleteDatetime>
@@ -213,12 +196,12 @@
          <StudyEventData StudyEventOID="StudyEventOID" StudyEventRepeatKey="1">
             <FormData FormOID="FormOID" FormRepeatKey="1">
                <ItemGroupData ItemGroupOID="DATATYPE" ItemGroupRepeatKey="MIXED ATTRIBUTE/ELEMENT" TransactionType="Insert">
-                  <ItemData    ItemOID="ID.PD"  Value="1959-12" />
+                  <ItemData ItemOID="ID.PD" Value="1959-12"/>
                   <ItemDataAny ItemOID="ID.PT">noon</ItemDataAny>
-                  <ItemData    ItemOID="ID.PDT" Value="1959-12-11T12"/>
+                  <ItemData ItemOID="ID.PDT" Value="1959-12-11T12"/>
                   <ItemDataIntervalDatetime ItemOID="ID.IDT" AuditRecordID="Audit-001">1959-12-11/2003-11-07T16:24</ItemDataIntervalDatetime>
                   <ItemDataDurationDatetime ItemOID="ID.DDT" AuditRecordID="Audit-001">P03Y11M07DT16H</ItemDataDurationDatetime>
-                  <ItemData ItemOID="ID.NDT" Value="1959---11T12:34:56-05:00" />
+                  <ItemData ItemOID="ID.NDT" Value="1959---11T12:34:56-05:00"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -242,7 +225,7 @@
                   <ItemDataPartialDate ItemOID="ID.PD">1959-12-11</ItemDataPartialDate>
                   <ItemDataPartialDate ItemOID="ID.PD">1959-12</ItemDataPartialDate>
                   <ItemDataPartialDate ItemOID="ID.PD">1959</ItemDataPartialDate>
-                  <ItemDataPartialDate ItemOID="ID.PD"></ItemDataPartialDate>
+                  <ItemDataPartialDate ItemOID="ID.PD"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -274,7 +257,7 @@
                <ItemDataPartialTime ItemOID="ID.PT">12-05:00</ItemDataPartialTime>
                <ItemDataPartialTime ItemOID="ID.PT">12</ItemDataPartialTime>
                <ItemDataPartialTime ItemOID="ID.PT">12Z</ItemDataPartialTime>
-               <ItemDataPartialTime ItemOID="ID.PT"></ItemDataPartialTime>
+               <ItemDataPartialTime ItemOID="ID.PT"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -319,7 +302,7 @@
                   <ItemDataPartialDatetime ItemOID="ID.PDT">1959-12-11</ItemDataPartialDatetime>
                   <ItemDataPartialDatetime ItemOID="ID.PDT">1959-12</ItemDataPartialDatetime>
                   <ItemDataPartialDatetime ItemOID="ID.PDT">1959</ItemDataPartialDatetime>
-                  <ItemDataPartialDatetime ItemOID="ID.PDT"></ItemDataPartialDatetime>
+                  <ItemDataPartialDatetime ItemOID="ID.PDT"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -353,7 +336,7 @@
                <ItemDataDurationDatetime ItemOID="ID.DDT">PT1383842940S</ItemDataDurationDatetime>
                <ItemDataDurationDatetime ItemOID="ID.DDT">P9W</ItemDataDurationDatetime>
                <ItemDataDurationDatetime ItemOID="ID.DDT">-P59Y</ItemDataDurationDatetime>
-               <ItemDataDurationDatetime ItemOID="ID.DDT"></ItemDataDurationDatetime>
+               <ItemDataDurationDatetime ItemOID="ID.DDT"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -403,7 +386,7 @@
                   <ItemDataIntervalDatetime ItemOID="ID.IDT">1959-12-11T04:23:00.7890-05:00/2003-11</ItemDataIntervalDatetime>
                   <ItemDataIntervalDatetime ItemOID="ID.IDT">1959-12-11T04:23:00.7890-05:00/2003</ItemDataIntervalDatetime>
 
-                  <ItemDataIntervalDatetime ItemOID="ID.IDT"></ItemDataIntervalDatetime>
+                  <ItemDataIntervalDatetime ItemOID="ID.IDT"/>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -476,7 +459,7 @@
                   <ItemDataIncompleteDatetime ItemOID="ID.NDT">1959-12-11</ItemDataIncompleteDatetime>
                   <ItemDataIncompleteDatetime ItemOID="ID.NDT">1959-12</ItemDataIncompleteDatetime>
                   <ItemDataIncompleteDatetime ItemOID="ID.NDT">1959</ItemDataIncompleteDatetime>
-                  <ItemDataIncompleteDatetime ItemOID="ID.NDT"></ItemDataIncompleteDatetime>
+                  <ItemDataIncompleteDatetime ItemOID="ID.NDT"/>
 
                   <ItemDataIncompleteDatetime ItemOID="ID.NDT">1959-12-11T12:34:56.7890-05:00</ItemDataIncompleteDatetime>
                   <ItemDataIncompleteDatetime ItemOID="ID.NDT">--12-11T12:34:56.7890-05:00</ItemDataIncompleteDatetime>
@@ -538,13 +521,13 @@
          <StudyEventData StudyEventOID="StudyEventOID" StudyEventRepeatKey="1">
             <FormData FormOID="FormOID" FormRepeatKey="1">
                <ItemGroupData ItemGroupOID="DATATYPE" ItemGroupRepeatKey="HEXBINARY" TransactionType="Insert">
-                  <ItemDataFloat        ItemOID="ID.FLOAT">3.14159265358979</ItemDataFloat>
-                  <ItemDataHexFloat     ItemOID="ID.HEXFLOAT">413243F6A8885A22</ItemDataHexFloat>
-                  <ItemDataBase64Float  ItemOID="ID.BASE64FLOAT"><![CDATA[QTJD9qiIWiI=]]></ItemDataBase64Float>
+                  <ItemDataFloat ItemOID="ID.FLOAT">3.14159265358979</ItemDataFloat>
+                  <ItemDataHexFloat ItemOID="ID.HEXFLOAT">413243F6A8885A22</ItemDataHexFloat>
+                  <ItemDataBase64Float ItemOID="ID.BASE64FLOAT">QTJD9qiIWiI=</ItemDataBase64Float>
 
-                  <ItemDataString       ItemOID="ID.STRING">magic decoder ring</ItemDataString>
-                  <ItemDataHexBinary    ItemOID="ID.HEXBINARY">6D61676963206465636F6465722072696E67</ItemDataHexBinary>
-                  <ItemDataBase64Binary ItemOID="ID.BASE64BINARY"><![CDATA[bWFnaWMgZGVjb2RlciByaW5n]]></ItemDataBase64Binary>
+                  <ItemDataString ItemOID="ID.STRING">magic decoder ring</ItemDataString>
+                  <ItemDataHexBinary ItemOID="ID.HEXBINARY">6D61676963206465636F6465722072696E67</ItemDataHexBinary>
+                  <ItemDataBase64Binary ItemOID="ID.BASE64BINARY">bWFnaWMgZGVjb2RlciByaW5n</ItemDataBase64Binary>
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -579,35 +562,35 @@
          <StudyEventData StudyEventOID="StudyEventOID" StudyEventRepeatKey="1">
             <FormData FormOID="FormOID" FormRepeatKey="1">
                <ItemGroupData ItemGroupOID="DATATYPE" ItemGroupRepeatKey="STANDARD" TransactionType="Insert">
-                  <ItemDataDate     ItemOID="ID.D">1959-12-11</ItemDataDate>
-                  <ItemDataTime     ItemOID="ID.T">04:23:00.7890-05:00</ItemDataTime>
-                  <ItemDataTime     ItemOID="ID.T">04:23:00.7890Z</ItemDataTime>
+                  <ItemDataDate ItemOID="ID.D">1959-12-11</ItemDataDate>
+                  <ItemDataTime ItemOID="ID.T">04:23:00.7890-05:00</ItemDataTime>
+                  <ItemDataTime ItemOID="ID.T">04:23:00.7890Z</ItemDataTime>
                   <ItemDataDatetime ItemOID="ID.DT">1959-12-11T04:23:00.7890-05:00</ItemDataDatetime>
                   <ItemDataDatetime ItemOID="ID.DT">1959-12-11T04:23:00.7890Z</ItemDataDatetime>
                    
-                  <ItemDataFloat    ItemOID="ID.FLOAT">123.456</ItemDataFloat> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123.456</ItemDataDouble> 
+                  <ItemDataFloat ItemOID="ID.FLOAT">123.456</ItemDataFloat> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123.456</ItemDataDouble> 
 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123E+456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123D+456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123E-456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123D-456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123.456E-789</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123.456D-789</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123E+456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123D+456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123E-456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123D-456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123.456E-789</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123.456D-789</ItemDataDouble> 
 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123e+456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123d+456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123e-456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123d-456</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123.456e-789</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">123.456d-789</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123e+456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123d+456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123e-456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123d-456</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123.456e-789</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">123.456d-789</ItemDataDouble> 
 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">0</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">-0</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">+0</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">INF</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">-INF</ItemDataDouble> 
-                  <ItemDataDouble   ItemOID="ID.DOUBLE">NaN</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">0</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">-0</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">+0</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">INF</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">-INF</ItemDataDouble> 
+                  <ItemDataDouble ItemOID="ID.DOUBLE">NaN</ItemDataDouble> 
                </ItemGroupData>
             </FormData>
          </StudyEventData>
@@ -621,16 +604,16 @@
         -->
       <AuditRecords>
          <AuditRecord ID="Audit-001">
-            <UserRef UserOID = "USR.inv001"/>
-            <LocationRef LocationOID = "LOC.site001"/>
+            <UserRef UserOID="USR.inv001"/>
+            <LocationRef LocationOID="LOC.site001"/>
             <DateTimeStamp>2002-02-04T14:11:32-05:00</DateTimeStamp>
             <SourceID>46881304</SourceID>
          </AuditRecord>
       </AuditRecords>
       
-      <Signatures />
+      <Signatures/>
       
-      <Annotations />
+      <Annotations/>
    
    </ClinicalData>
 
