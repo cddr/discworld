@@ -108,7 +108,8 @@ order) that passes `test'"
 argument (an odm-object) and returns true if that argument is an
 odm-object of the named type"
   (lambda (odm-obj)
-    (when (eq name (odm-type odm-obj))
+    (when (eq (intern (symbol-name name) :odm) 
+	      (odm-type odm-obj))
       odm-obj)))
 
 (defun kids-like (name &key in)
