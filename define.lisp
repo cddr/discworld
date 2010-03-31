@@ -59,16 +59,16 @@ See the Lisp Lesser GNU Public License for more details.
 	  (kids-like 'itemref :in self)))
 
 (defmethod description ((self domain))
-  (property self :|def:Label|))
+  (property self '|def|:|Label|))
 
 (defmethod data-structure ((self domain))
-  (property self :|def:Structure|))
+  (property self '|def|:|Structure|))
 
 (defmethod keys ((self domain))
-  (property self :|def:DomainKeys|))
+  (property self '|def|:|DomainKeys|))
 
 (defmethod location ((self domain))
-  (property self :|def:ArchiveLocationID|))
+  (property self '|def|:|ArchiveLocationID|))
 
 (defmethod purpose ((self domain))
   (property self :|Purpose|))
@@ -83,7 +83,7 @@ See the Lisp Lesser GNU Public License for more details.
 
 (defmethod label ((self var))
   (property (find-def self)
-	    :|def:Label|))
+	    '|def|:|Label|))
 
 (defmethod data-type ((self var))
   (property (find-def self)
