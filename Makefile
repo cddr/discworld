@@ -17,3 +17,8 @@ dist: discworld.asd
 	  $(TARNAME)/discworld.asd
 	rm -r $(TARNAME)
 	gzip -f -9 $(TARNAME).tar
+
+.PHONY: clean
+clean:
+	find . -name "*.fasl" |xargs rm -f
+	rm -rf sbcl-*
