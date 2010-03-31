@@ -25,6 +25,8 @@ the entire tree when looking up references
 see `odm-index' and `odm-lookup' for usage
 ")
 
+;;; Wrap native s-xml objects with a thin class allowing access to
+;;; each node's parent.
 (defclass odm-object ()
   ((xml :initarg :xml :accessor xml)
    (parent :initarg :parent :accessor parent)))
@@ -258,14 +260,15 @@ odm-lookup"
 	    (kids mdv))))
 
   (defun parse-odm (filename &key (into 'odm-object))
-    (let ((doc (parse-xml-file filename :output-type :xml-struct)))
-      ;; parsing a new file clears the object cache
-      (clrhash obj-cache)
-      (when doc
-	(let ((root (funcall (odm-object-factory nil into)
-			     doc)))
-	  (index-defs root)
-	  root))))
+    (with-open-file (s filename)
+      (let ((doc (parse-xml-dom s :xml-struct)))
+	;; parsing a new file clears the object cache
+	(clrhash obj-cache)
+	(when doc
+	  (let ((root (funcall (odm-object-factory nil into)
+			       doc)))
+	    (index-defs root)
+	    root)))))
 
   (defun odm-object-factory (parent-node &optional 
 			     (object-type 'odm-object))

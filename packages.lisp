@@ -1,6 +1,6 @@
 
 (defpackage :odm
-  (:use :cl)
+  (:use :cl :s-xml)
   (:export #:oid 
 	   #:name #:property #:properties
 
