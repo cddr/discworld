@@ -1,12 +1,6 @@
 
 (in-package :test.discworld)
 
-
-(parse-odm (find-test-file "odm130.utf-8.xml"))
-	    
-
-
-
 (deftest test/odm121 ()
   (let ((root (parse-odm (find-test-file "odm121.xml"))))
     (check (string= "1.2"
@@ -26,7 +20,7 @@
 		    (property root :|FileOID|)))))
 
 (deftest test/parse ()
-  (test/odm121))
-  ;(test/odm130) ;; fails because s-xml tries to read as utf-8
+  (test/odm121)
+  (test/odm130)) ;; fails because s-xml tries to read as utf-8
 
 (test/parse)
