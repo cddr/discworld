@@ -18,25 +18,24 @@ See the Lisp Lesser GNU Public License for more details.
 
 (in-package :define)
 
-(defclass study (odm-object)
+(defclass study (odm::odm-object)
   ((domains :initarg :domains :accessor domains :initform nil)))
 
-(defclass domain (odm-object)
+(defclass domain (odm::odm-object)
   ((vars :initarg :vars :accessor vars)))
 
-(defclass var (odm-object)
+(defclass var (odm::odm-object)
   ())
 
 (defun find-study (study-id)
   (declare (ignore study-id))
-  (parse-odm "config/sdtm-3.1.2.xml"
+  (parse-odm #p"/usr/src/discworld/t/data/define-cdiscpilot01.xml"
 	     :into 'study))
 
 (defun find-domain (study-id domain-id)
   (let* ((study (find-study study-id))
 	 (domains (domains study)))
     (find-if (name= domain-id) domains)))
-
 
 ;;; study accessors
 
@@ -45,11 +44,9 @@ See the Lisp Lesser GNU Public License for more details.
    (odm-find-one self :test (of-elem-type 'studyname))))
 
 (defmethod domains ((self study))
-  (let ((root (odm-root self)))
-    (mapcar (lambda (odm)
-  	      (change-class odm 'domain))
-  	    (odm-gather root
-  			:test (of-elem-type 'itemgroupdef)))))
+  (mapcar (lambda (odm)
+	    (change-class odm 'domain))
+	  (groups self)))
 
 ;;; domain accessors
 
@@ -62,16 +59,16 @@ See the Lisp Lesser GNU Public License for more details.
 	  (kids-like 'itemref :in self)))
 
 (defmethod description ((self domain))
-  (property self '|def|:|Label|))
+  (property self :|def:Label|))
 
 (defmethod data-structure ((self domain))
-  (property self '|def|:|Structure|))
+  (property self :|def:Structure|))
 
 (defmethod keys ((self domain))
-  (property self '|def|:|DomainKeys|))
+  (property self :|def:DomainKeys|))
 
 (defmethod location ((self domain))
-  (property self '|def|:|ArchiveLocationID|))
+  (property self :|def:ArchiveLocationID|))
 
 (defmethod purpose ((self domain))
   (property self :|Purpose|))
@@ -86,7 +83,7 @@ See the Lisp Lesser GNU Public License for more details.
 
 (defmethod label ((self var))
   (property (find-def self)
-	    '|def|:|Label|))
+	    :|def:Label|))
 
 (defmethod data-type ((self var))
   (property (find-def self)
