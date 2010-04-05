@@ -18,89 +18,63 @@ See the Lisp Lesser GNU Public License for more details.
 
 (in-package :define)
 
-(defclass study (odm::odm-object)
-  ((domains :initarg :domains :accessor domains :initform nil)))
-
-(defclass domain (odm::odm-object)
-  ((vars :initarg :vars :accessor vars)))
-
-(defclass var (odm::odm-object)
-  ())
-
-(defun find-study (study-id)
+(defun find-define (study-id)
   (declare (ignore study-id))
-  (parse-odm #p"/usr/src/discworld/t/data/define-cdiscpilot01.xml"
-	     :into 'study))
+  (parse-odm #p"/usr/src/discworld/t/data/define-cdiscpilot01.xml"))
 
 (defun find-domain (study-id domain-id)
-  (let* ((study (find-study study-id))
+  (let* ((study (find-define study-id))
 	 (domains (domains study)))
     (find-if (name= domain-id) domains)))
 
 ;;; study accessors
 
-(defmethod name ((self study))
-  (value-of 
-   (odm-find-one self :test (of-elem-type 'studyname))))
-
-(defmethod domains ((self study))
-  (mapcar (lambda (odm)
-	    (change-class odm 'domain))
-	  (groups self)))
+(defun domains (study)
+  (groups study))
 
 ;;; domain accessors
 
-(defmethod name ((self domain))
-  (property self :|Name|))
+(defun variables (domain)
+  (items domain))
 
-(defmethod variables ((self domain))
-  (mapcar (lambda (odm)
-	    (change-class odm 'var))
-	  (kids-like 'itemref :in self)))
+(defun description (domain)
+  (property domain '|:def:Label|))
 
-(defmethod description ((self domain))
-  (property self '|def|:|Label|))
+(defun data-structure (domain)
+  (property domain '|:def:Structure|))
 
-(defmethod data-structure ((self domain))
-  (property self '|def|:|Structure|))
+(defun keys (domain)
+  (property domain '|:def:DomainKeys|))
 
-(defmethod keys ((self domain))
-  (property self '|def|:|DomainKeys|))
+(defun location (domain)
+  (property domain '|:def:ArchiveLocationID|))
 
-(defmethod location ((self domain))
-  (property self '|def|:|ArchiveLocationID|))
-
-(defmethod purpose ((self domain))
-  (property self :|Purpose|))
-
-(defmethod vars ((self domain))
-  (kids-like 'itemref :in self))
+(defun purpose (domain)
+  (property domain :|Purpose|))
 
 ;; variable accessors
 
-(defmethod name ((self var))
-  (name (find-def self)))
+(defun label (var)
+  (property (find-def var)
+	    '|:def:Label|))
 
-(defmethod label ((self var))
-  (property (find-def self)
-	    '|def|:|Label|))
-
-(defmethod data-type ((self var))
-  (property (find-def self)
+(defun data-type (var)
+  (property (find-def var)
 	    :|DataType|))
 
-(defmethod terminology ((self var))
+(defun terminology (var)
+  (declare (ignore var))
   nil)
 
-(defmethod origin ((self var))
-  (property (find-def self)
+(defun origin (var)
+  (property (find-def var)
 	    :|Origin|))
 
-(defmethod role ((self var))
-  (property (find-def self)
+(defun role (var)
+  (property (find-def var)
 	    :|Role|))
 
-(defmethod comment ((self var))
-  (property (find-def self)
+(defun comment (var)
+  (property (find-def var)
 	    :|Comment|))
 

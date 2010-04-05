@@ -1,8 +1,8 @@
 
 (defpackage :odm
   (:use :cl :s-xml)
-  (:export #:oid 
-	   #:name #:property #:properties
+  (:export #:oid #:name
+	   #:property #:properties
 
 	   #:study #:metadata #:events #:forms #:groups #:items
 	   #:question
@@ -10,7 +10,7 @@
 	   #:odm-root
 	   #:odm-type
 
-	   #:kids-like #:name= #:odm-find-one #:odm-gather
+	   #:kids-like #:name= #:find-one #:gather
 	   #:of-elem-type #:value-of
 
 	   #:kids #:find-def

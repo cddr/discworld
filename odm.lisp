@@ -37,29 +37,46 @@ see `odm-index' and `odm-lookup' for usage
 	    (odm-type self)
 	    (oid self))))
 
-(defmethod property ((self odm-object) name)
+(defun property (self name)
   (when (xml-element-p (xml self))
     (xml-element-attribute (xml self) name)))
 
-(defmethod oid ((self odm-object))
+(defun oid (self)
   (property self (oid-attr
 		  (odm-type self))))
 
-(defmethod name ((self odm-object))
-  (property self :|Name|))
+(defun def-p (self)
+  (member (odm-type self)
+	  '(codelist itemdef itemgroupdef formdef studyeventdef)))
 
-(defmethod properties ((self odm-object))
+(defun ref-p (self)
+  (member (odm-type self)
+	  '(codelistref itemref itemgroupref formref studyeventref)))
+
+(defun study-p (self)
+  (eq 'study (odm-type self)))
+
+(defun name (self)
+  (flet ((%name (self)
+	   (cond ((def-p self) (property self :|Name|))
+		 ((ref-p self) (name (find-def self)))
+		 ((study-p self) (value-of
+				  (find-one self :test 
+					    (of-elem-type 'studyname)))))))
+    (%name self)))
+
+(defun properties (self)
   (when (xml-element-p (xml self))
     (xml-element-attributes
      (xml self))))
 
-(defmethod odm-root ((self odm-object))
+(defun root (self)
   "Returns the root to which this object belongs"
   (if (null (parent self))
       self
-      (odm-root (parent self))))
+      (root (parent self))))
 
-(defmethod odm-type ((self odm-object))
+(defun odm-type (self)
   "Returns the type of this object (will correspond with
 one of the 'General Elements' defined by CDISC ODM"
   (typecase (xml self)
@@ -70,20 +87,20 @@ one of the 'General Elements' defined by CDISC ODM"
 			 :odm))
     (t 'unknown)))
 
-(defmethod kids ((self odm-object))
+(defun kids (self)
   "Returns this object's kids"
   (when (xml-element-p (xml self))
     (mapcar (odm-object-factory self)
 	    (xml-element-children
 	     (xml self)))))
 
-(defun odm-gather (root &key (test (constantly t)))
+(defun gather (root &key (test (constantly t)))
   "Traverses the ODM model looking for nodes that pass `test'"
   (flatten
    (cons (when (funcall test root)
 	   root)
 	 (mapcar (lambda (root)
-		   (odm-gather root :test test))
+		   (gather root :test test))
 		 (kids root)))))
 
 (defun value-of (odm-object)
@@ -92,15 +109,15 @@ one of the 'General Elements' defined by CDISC ODM"
   (with-output-to-string (s)
     (mapc (lambda (item)
 	    (format s "~a" (xml item)))
-	  (odm-gather odm-object :test (of-elem-type 'odm-text)))))
+	  (gather odm-object :test (of-elem-type 'odm-text)))))
 
-(defun odm-find-one (root &key test)
+(defun find-one (root &key test)
   "Traverses the ODM model looking for the first node (in document
 order) that passes `test'"
   (if (funcall test root)
       root
       (some (lambda (kid)
-	      (odm-find-one kid :test test))
+	      (find-one kid :test test))
 	    (kids root))))
 
 (defun of-elem-type (name)
@@ -193,7 +210,7 @@ if that argument has a property named `property-name' with value
       #'(lambda (x)
 	  (and (funcall fn x) (funcall chain x))))))
 
-(defun odm-flip (sym)
+(defun flip (sym)
   "Flips a symbol from either def to ref, or ref to def depending
 on what was passed in
 
@@ -209,7 +226,7 @@ XXX Needs a better name.  I'm open to suggestions"
        finally (return nil))))
 
 
-(defmethod find-def ((ref odm-object))
+(defun find-def (ref)
   "Finds the \"def\" referenced by `ref'
 
 XXX This only really works in the simplest of cases.  For example,
@@ -218,7 +235,7 @@ ref might reference a def in another MetaDataVersion.  It is
 reasonably efficent though, using as it does the index through
 odm-lookup"
   (odm-lookup
-   :type (odm-flip (odm-type ref))
+   :type (flip (odm-type ref))
    :metadata (metadata ref)
    :ref ref))
 
@@ -286,38 +303,39 @@ odm-lookup"
 ;;; Handy ODM accessors
 
 ;; XXX assumes an ODM with a single study
-(defmethod study ((self odm-object))
-  (first (kids-like 'study :in (odm-root self))))
+(defun study (self)
+  (first (kids-like 'study :in (root self))))
 
 ;; XXX assumes an ODM with a single MetaDataVersion
-(defmethod metadata ((self odm-object))
+(defun metadata (self)
   (first (kids-like 'metadataversion :in (study self))))
 
-(defmethod events ((self odm-object))
-  (odm-gather (metadata self)
-    :test (of-elem-type 'studyeventdef)))
+(defun events (self)
+  (case (odm-type self)
+    (protocol (mapcar 'find-def (kids-like 'studyeventref :in self)))
+    (t (kids-like 'studyeventdef :in (metadata self)))))
 
-(defmethod forms ((self odm-object))
+(defun forms (self)
   (case (odm-type self)
     (studyevent (mapcar 'find-def (kids-like 'formref :in self)))
     (t (kids-like 'formdef :in (metadata self)))))
 
-(defmethod groups ((self odm-object))
+(defun groups (self)
   (case (odm-type self)
     (formdef (mapcar 'find-def (kids-like 'itemgroupref :in self)))
     (t (kids-like 'itemgroupdef :in (metadata self)))))
 
-(defmethod items ((self odm-object))
+(defun items (self)
   (case (odm-type self)
     (itemgroupdef (mapcar 'find-def (kids-like 'itemref :in self)))
     (t (kids-like 'itemdef :in (metadata self)))))
 
-(defmethod question ((self odm-object))
-  (let ((q (odm-find-one self 
+(defun question (self)
+  (let ((q (find-one self 
              :test (of-elem-type 'question))))
     (when q
       ;; XXX must add support for multiple TranslatedText items
       (string-trim 
        '(#\Space #\Tab #\Newline)
-       (xml (odm-find-one q
-			  :test (of-elem-type 'odm-text)))))))
+       (xml (find-one q
+		      :test (of-elem-type 'odm-text)))))))
