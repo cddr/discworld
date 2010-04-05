@@ -18,6 +18,8 @@ See the Lisp Lesser GNU Public License for more details.
 
 (in-package :define)
 
+(register-namespace "http://www.cdisc.org/ns/def/v1.0" "def" :define)
+
 (defun find-define (study-id)
   (declare (ignore study-id))
   (parse-odm #p"/usr/src/discworld/t/data/define-cdiscpilot01.xml"))
@@ -35,28 +37,35 @@ See the Lisp Lesser GNU Public License for more details.
 ;;; domain accessors
 
 (defun variables (domain)
-  (items domain))
+  (kids-like 'itemref :in  domain))
 
 (defun description (domain)
-  (property domain '|:def:Label|))
+  (property domain '|Label|))
 
 (defun data-structure (domain)
-  (property domain '|:def:Structure|))
+  (property domain '|Structure|))
 
 (defun keys (domain)
-  (property domain '|:def:DomainKeys|))
+  (property domain '|DomainKeys|))
 
 (defun location (domain)
-  (property domain '|:def:ArchiveLocationID|))
+  (property domain '|ArchiveLocationID|))
 
-(defun purpose (domain)
-  (property domain :|Purpose|))
+(defun schema (domain)
+  (format nil "
+create table ~a (
+~{  ~a~^,~%~}
+);"
+	  (name domain)
+	  (mapcar (lambda (var)
+		    (name var))
+		  (variables domain))))
 
 ;; variable accessors
 
 (defun label (var)
   (property (find-def var)
-	    '|:def:Label|))
+	    '|Label|))
 
 (defun data-type (var)
   (property (find-def var)

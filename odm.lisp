@@ -18,6 +18,9 @@ See the Lisp Lesser GNU Public License for more details.
 
 (in-package :odm)
 
+(register-namespace "http://www.cdisc.org/ns/odm/v1.2" "odm" :odm)
+(register-namespace "http://www.cdisc.org/ns/odm/v1.3" "odm" :odm)
+
 (defvar *odm-index* (make-hash-table :test 'equal)
   "An index of ODM \"defs\" is maintained to avoid traversing
 the entire tree when looking up references
@@ -64,6 +67,9 @@ see `odm-index' and `odm-lookup' for usage
 				  (find-one self :test 
 					    (of-elem-type 'studyname)))))))
     (%name self)))
+
+(defun purpose (self)
+  (property self ':|Purpose|))
 
 (defun properties (self)
   (when (xml-element-p (xml self))

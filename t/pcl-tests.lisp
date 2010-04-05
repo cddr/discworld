@@ -1,7 +1,13 @@
 (defpackage :test.discworld
-  (:use :cl :odm :define))
+  (:use :cl :odm :define)
+  (:export #:run-tests))
 
 (in-package :test.discworld)
+
+(defun run-tests ()
+  (asdf:operate 'asdf:load-op :discworld)
+  (test/odm)
+  (test/define))
 
 (defvar *test-name* nil)
 

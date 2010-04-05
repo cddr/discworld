@@ -1,6 +1,12 @@
 
 (in-package :test.discworld)
 
+(deftest test/odm ()
+  (test/odm121)
+  (test/odm130)
+  (test/oid)
+  (test/name))
+
 (deftest test/odm121 ()
   (let ((root (odm:parse-odm (find-test-file "odm121.xml"))))
     (check (string= "1.2"
@@ -39,14 +45,3 @@
     (check (string= "Form Definition" (odm:name form)))
     (check (string= "ItemData Extension" (odm:name group)))))
 
-(deftest test/parse ()
-  (test/odm121)
-  (test/odm130))
-
-(deftest test/accessors ()
-  (test/oid)
-  (test/name))
-
-
-(test/parse)
-(test/accessors)
