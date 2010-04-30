@@ -37,5 +37,6 @@
 	     #:terminology
 	     #:origin
 	     #:role
-	     #:comment))
+	     #:comment
+	     #:key-p))
 	   

@@ -87,3 +87,7 @@ create table ~a (
   (property (find-def var)
 	    :|Comment|))
 
+(defun key-p (var)
+  (search (name var)
+	  (keys (odm::parent var))))
+
