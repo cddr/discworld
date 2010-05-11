@@ -28,11 +28,11 @@ the entire tree when looking up references
 see `odm-index' and `odm-lookup' for usage
 ")
 
-;;; Wrap native s-xml objects with a thin class allowing access to
-;;; each node's parent.
 (defclass odm-object ()
   ((xml :initarg :xml :accessor xml)
-   (parent :initarg :parent :accessor parent)))
+   (parent :initarg :parent :accessor parent))
+  (:documentation "An odm-object can be any type of object described by
+the CDISC ODM model (e.g. ItemDef, CodeList, ItemGroupDef etc)"))
 
 (defmethod print-object ((self odm-object) stream)
   (print-unreadable-object (self stream :identity t)
@@ -40,11 +40,24 @@ see `odm-index' and `odm-lookup' for usage
 	    (odm-type self)
 	    (oid self))))
 
+(defmethod odm-path ((self odm-object))
+  "Returns the xpath address of this object (only applicable for
+objects which respond to the `oid' generic function)"
+  (cond 
+    ((root-p self) (format nil "document('~a')/ODM"
+			   (oid self)))
+    ((oid self) (format nil "~a/~a[@OID='~a']"
+			(odm-path (parent self))
+			(symbol-name (xml-element-name (xml self)))
+			(oid self)))))
+
 (defun property (self name)
+  "Returns the named property of `self'"
   (when (xml-element-p (xml self))
     (xml-element-attribute (xml self) name)))
 
 (defun oid (self)
+  "Returns the `oid' of `self'"
   (property self (oid-attr
 		  (odm-type self))))
 
@@ -55,6 +68,12 @@ see `odm-index' and `odm-lookup' for usage
 (defun ref-p (self)
   (member (odm-type self)
 	  '(codelistref itemref itemgroupref formref studyeventref)))
+
+(defun root-p (self)
+  (not (parent self)))
+
+(defun mdv-p (self)
+  (eq 'metadataversion (odm-type self)))
 
 (defun study-p (self)
   (eq 'study (odm-type self)))
@@ -101,7 +120,10 @@ one of the 'General Elements' defined by CDISC ODM"
 	     (xml self)))))
 
 (defun gather (root &key (test (constantly t)))
-  "Traverses the ODM model looking for nodes that pass `test'"
+  "Traverses the ODM model looking for nodes that pass `test'
+
+NB. This method traverses the whole tree and as such is pretty expensive
+Don't use it in a loop"
   (flatten
    (cons (when (funcall test root)
 	   root)
@@ -245,7 +267,6 @@ odm-lookup"
    :metadata (metadata ref)
    :ref ref))
 
-
 (defun odm-index (mdv def)
   (setf (gethash (list (odm-type def)
 		       (oid mdv)
@@ -272,18 +293,13 @@ odm-lookup"
 ;; equality for objects that are, well, equal.
 (let ((obj-cache (make-hash-table :test 'equal)))
 
-  (defun parse-odm-stream (stream)
-    (let ((doc (parse-xml stream :output-type :xml-struct)))
-      (clrhash obj-cache)
-      (funcall (odm-object-factory nil) doc)))
-
   (defun index-defs (root)
     (let ((mdv (metadata root)))
       (mapc (lambda (def)
 	      (odm-index mdv def))
 	    (kids mdv))))
 
-  (defun parse-odm (filename &key (into 'odm-object))
+  (defun odm-parse (filename &key (into 'odm-object))
     (with-open-file (s filename)
       (let ((doc (parse-xml-dom s :xml-struct)))
 	;; parsing a new file clears the object cache

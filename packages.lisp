@@ -16,8 +16,7 @@
 	   #:kids #:find-def
 	   #:items #:groups #:forms #:events #:metadata
 
-	   #:parse-odm
-	   #:parse-odm-stream))
+	   #:odm-parse))
 
 (defpackage :define
   (:use :cl :s-xml :odm)
