@@ -26,7 +26,7 @@ See the Lisp Lesser GNU Public License for more details.
   :license "LLGPL"
   :version "0.2.1"
   :name "discworld"
-  :depends-on (:s-xml)
+  :depends-on (:s-xml :lisp-db)
   :serial t
   :components
   (
