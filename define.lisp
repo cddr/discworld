@@ -16,13 +16,13 @@ See the Lisp Lesser GNU Public License for more details.
 
 |#
 
-(in-package :define)
+(in-package :dw.define)
 
 (register-namespace "http://www.cdisc.org/ns/def/v1.0" "def" #.*package*)
 
 (defun find-define (study-id)
   (declare (ignore study-id))
-  (parse-odm #p"/usr/src/discworld/t/data/define-cdiscpilot01.xml"))
+  (odm-parse #p"/usr/src/discworld/t/data/define-cdiscpilot01.xml"))
 
 (defun find-domain (study-id domain-id)
   (let* ((study (find-define study-id))
@@ -89,5 +89,5 @@ create table ~a (
 
 (defun key-p (var)
   (search (name var)
-	  (keys (odm::parent var))))
+	  (keys (parent var))))
 

@@ -1,25 +1,36 @@
 
-(defpackage :odm
+(defpackage :dw.odm
   (:use :cl :s-xml)
-  (:export #:oid #:name #:purpose
+  (:export #:odm-object #:oid #:name #:purpose
 	   #:property #:properties
 
 	   #:study #:metadata #:events #:forms #:groups #:items
 	   #:question
+	   #:repeating-p
 
-	   #:odm-root
+	   #:root
 	   #:odm-type
+	   #:odm-path
 
-	   #:kids-like #:name= #:find-one #:gather
+	   #:parent #:kids-like #:oid= #:name= #:find-one #:gather
 	   #:of-elem-type #:value-of
+	   #:fint
 
 	   #:kids #:find-def
 	   #:items #:groups #:forms #:events #:metadata
 
-	   #:odm-parse))
+	   #:odm-parse #:odm-write))
 
-(defpackage :define
-  (:use :cl :s-xml :odm)
+(defpackage :dw.api
+  (:use :cl :dw.odm :lisp-db)
+  (:export #:*db-root*
+	   #:put
+	   #:post
+	   #:serve))
+
+
+(defpackage :dw.define
+  (:use :cl :s-xml :dw.odm)
   (:export #:find-define #:find-domain
 	   #:domains #:variables
 	     #:name

@@ -1,8 +1,8 @@
-(defpackage :test.discworld
-  (:use :cl :odm :define)
+(defpackage :dw.test
+  (:use :cl :dw.odm :dw.define)
   (:export #:run-tests))
 
-(in-package :test.discworld)
+(in-package :dw.test)
 
 (defun run-tests ()
   (asdf:operate 'asdf:load-op :discworld)

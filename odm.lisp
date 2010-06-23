@@ -16,7 +16,7 @@ See the Lisp Lesser GNU Public License for more details.
 
 |#
 
-(in-package :odm)
+(in-package :dw.odm)
 
 (register-namespace "http://www.cdisc.org/ns/odm/v1.2" "odm" #.*package*)
 (register-namespace "http://www.cdisc.org/ns/odm/v1.3" "odm" #.*package*)
@@ -89,6 +89,10 @@ objects which respond to the `oid' generic function)"
 
 (defun purpose (self)
   (property self ':|Purpose|))
+
+(defun repeating-p (group)
+  (string= (property group ':|Repeating|)
+	   "Yes"))
 
 (defun properties (self)
   (when (xml-element-p (xml self))
@@ -253,7 +257,6 @@ XXX Needs a better name.  I'm open to suggestions"
        when (eq def sym) return ref
        finally (return nil))))
 
-
 (defun find-def (ref)
   "Finds the \"def\" referenced by `ref'
 
@@ -298,6 +301,15 @@ odm-lookup"
       (mapc (lambda (def)
 	      (odm-index mdv def))
 	    (kids mdv))))
+  
+  (defun odm-write (filename odm-object)
+    (with-open-file (s filename :direction :output 
+		       :if-exists :overwrite
+		       :if-does-not-exist :create)
+      (print-xml (xml odm-object) 
+		 :stream s
+		 :pretty t 
+		 :input-type :xml-struct)))
 
   (defun odm-parse (filename &key (into 'odm-object))
     (with-open-file (s filename)
@@ -361,3 +373,4 @@ odm-lookup"
        '(#\Space #\Tab #\Newline)
        (xml (find-one q
 		      :test (of-elem-type 'odm-text)))))))
+
