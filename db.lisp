@@ -31,3 +31,26 @@ create table ~a (
     (append *meta-schema*
 	    (mapcar #'domain-tbl (groups mdv)))))
 
+(defun load-schema (mdv)
+  (mapc (lambda (item)
+	  (sql> item))
+	(schema mdv)))
+
+(defun load-codelists (mdv)
+  (flet ((codelist-data (cl)
+	   (loop for item in (kids-like 'codelistitem :in cl)
+	      collect
+		(list (property cl :|Name|)
+		      (property item :|CodedValue|)
+		      (value-of (find-one item :test 
+					  (of-elem-type 'translatedtext)))))))
+    (mapc (lambda (row)
+	    (sql> "insert into _codelists (oid, coded_value, decode)
+                      values (:oid, :coded_value, :decode)"
+		  (list :oid (first row)
+			:coded-value (second row)
+			:decode (third row))))
+	  (loop for cl in (codelists mdv)
+	     nconc (codelist-data cl)))))
+
+	  
