@@ -18,7 +18,7 @@ See the Lisp Lesser GNU Public License for more details.
 
 (in-package :define)
 
-(register-namespace "http://www.cdisc.org/ns/def/v1.0" "def" :define)
+(register-namespace "http://www.cdisc.org/ns/def/v1.0" "def" #.*package*)
 
 (defun find-define (study-id)
   (declare (ignore study-id))

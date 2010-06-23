@@ -18,8 +18,8 @@ See the Lisp Lesser GNU Public License for more details.
 
 (in-package :odm)
 
-(register-namespace "http://www.cdisc.org/ns/odm/v1.2" "odm" :odm)
-(register-namespace "http://www.cdisc.org/ns/odm/v1.3" "odm" :odm)
+(register-namespace "http://www.cdisc.org/ns/odm/v1.2" "odm" #.*package*)
+(register-namespace "http://www.cdisc.org/ns/odm/v1.3" "odm" #.*package*)
 
 (defvar *odm-index* (make-hash-table :test 'equal)
   "An index of ODM \"defs\" is maintained to avoid traversing
@@ -109,7 +109,7 @@ one of the 'General Elements' defined by CDISC ODM"
     (s-xml::xml-element (intern (string-upcase
 			  (format nil "~a" (xml-element-name
 					    (xml self))))
-			 :odm))
+			 #.*package*))
     (t 'unknown)))
 
 (defun kids (self)
@@ -153,7 +153,7 @@ order) that passes `test'"
 argument (an odm-object) and returns true if that argument is an
 odm-object of the named type"
   (lambda (odm-obj)
-    (when (eq (intern (symbol-name name) :odm) 
+    (when (eq (intern (symbol-name name) #.*package*) 
 	      (odm-type odm-obj))
       odm-obj)))
 
@@ -171,7 +171,7 @@ odm-object of the named type"
 (defun oid-attr (odm-type)
   "Returns the property which should be used to obtain the OID
 of an odm-object of `odm-type'"
-  (case (intern (symbol-name odm-type) :odm)
+  (case (intern (symbol-name odm-type) #.*package*)
     (odm :|FileOID|)
     (studyeventref :|StudyEventOID|)
     (formref :|FormOID|)
