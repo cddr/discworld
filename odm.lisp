@@ -364,6 +364,9 @@ odm-lookup"
     (itemgroupdef (mapcar 'find-def (kids-like 'itemref :in self)))
     (t (kids-like 'itemdef :in (metadata self)))))
 
+(defun codelists (self)
+  (kids-like 'codelist :in (metadata self)))
+
 (defun question (self)
   (let ((q (find-one self 
              :test (of-elem-type 'question))))

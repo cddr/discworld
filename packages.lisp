@@ -17,7 +17,7 @@
 	   #:fint
 
 	   #:kids #:find-def
-	   #:items #:groups #:forms #:events #:metadata
+	   #:codelists #:items #:groups #:forms #:events #:metadata
 
 	   #:odm-parse #:odm-write))
 
