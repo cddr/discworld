@@ -21,14 +21,6 @@
 
 	   #:odm-parse #:odm-write))
 
-(defpackage :dw.api
-  (:use :cl :dw.odm :lisp-db)
-  (:export #:*db-root*
-	   #:put
-	   #:post
-	   #:serve))
-
-
 (defpackage :dw.define
   (:use :cl :s-xml :dw.odm)
   (:export #:find-define #:find-domain
@@ -50,3 +42,11 @@
 	     #:comment
 	     #:key-p))
 	   
+(defpackage :dw.api
+  (:use :cl :lisp-db :dw.odm :dw.define)
+  (:export #:*db-root*
+	   #:put
+	   #:post
+	   #:serve))
+
+
