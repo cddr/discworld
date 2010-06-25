@@ -62,11 +62,11 @@ The properties defined in the specifications can be accessed using
 the `property' function.  In addition, convenience functions are defined
 to access a few commonly used properties
 
-   (mapcar (lambda (item)
-             (property item :|DataType|))
-           (items *odm-test*))
-   => (list "text" "integer" "boolean" ..)
+    (mapcar (lambda (item)
+              (property item :|DataType|))
+            (items *odm-test*))
+    => (list "text" "integer" "boolean" ..)
 
-   (mapcar #'oid (items *odm-test*))
-   => (list "AETERM" "SAE" "AESEV" ..)
+    (mapcar #'oid (items *odm-test*))
+    => (list "AETERM" "SAE" "AESEV" ..)
       
