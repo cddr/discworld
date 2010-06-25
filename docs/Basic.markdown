@@ -20,9 +20,9 @@ interface to the concepts described in the model.
 To read in an odm file, use odm-parse.  The result of calling odm-parse
 is also a "root" odm-object.
 
-  (defparameter *odm-test* (odm-parse "/home/andy/studies/001.xml"))
-  (root-p *odm-test*)
-  => t
+    (defparameter *odm-test* (odm-parse "/home/andy/studies/001.xml"))
+    (root-p *odm-test*)
+    => t
 
 # Access metadata elements
 
