@@ -1,3 +1,5 @@
+# Basic Operations 
+
 From the specifications....
 
 > The Operational Data Model (ODM) is a vendor neutral, platform
@@ -9,11 +11,11 @@ From the specifications....
 > submission or for long term retention as part of an archive is
 > included in the model.
 
-So ODM is just an XML format.  We define a base-class `odm-object' to
+So ODM is just a data model.  We define a base-class `odm-object' to
 abstract away the implementation details, and just provide a functional
 interface to the concepts described in the model.
 
-# read an ODM file
+# Read an ODM file
 
 To read in an odm file, use odm-parse.  The result of calling odm-parse
 is also a "root" odm-object.
@@ -22,7 +24,7 @@ is also a "root" odm-object.
   (root-p *odm-test*)
   => t
 
-# access metadata elements
+# Access metadata elements
 
 Accessors have been defined for all the various types of metadata.  The
 names from the standard are "lispified" versions of the corresponding
@@ -40,7 +42,7 @@ names in the CDISC specifications
     (mapcar #'question (items *odm-test*))
     => list of <Question/> odm-objects
 
-# defs and refs
+# Defs and Refs
 
 In the metadata section of the model, we introduce the concept of "defs"
 and "refs". def-p returns true if the object is a def.  ref-p returns
